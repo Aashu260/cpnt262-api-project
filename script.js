@@ -117,10 +117,5 @@ function displayWeatherInfo(data) {
 
 // error messages
 function displayError(message) {
-  const errorDisplay = document.createElement("p");
-  errorDisplay.textContent = message;
-  errorDisplay.classList.add("errorDisplay");
-  card.textContent = "";
-  card.style.display = "flex";
-  card.appendChild(errorDisplay);
+  card.innerHTML = `<div class="errorDisplay">${message}</div>`;
 }
