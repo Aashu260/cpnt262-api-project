@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Welcome <span id="givenName">User</span></h1>
+      <form class="weatherForm">
+        <input type="text" class="nameInput" placeholder="Enter Your Name" />
+        <input type="text" class="cityInput" placeholder="Enter City" />
+        <div class="toggle-container">
+          <label class="switch">
+            <input type="checkbox" id="toggleCheckbox" />
+            <span class="slider round"></span>
+          </label>
+          <span class="toggle-text">Change to Celsius</span>
+        </div>
+
+        <button type="submit">Get weather</button>
+      </form>
+
+      <div class="card" style="display: none"></div>
+    </div>
+  </body>
+</html>
