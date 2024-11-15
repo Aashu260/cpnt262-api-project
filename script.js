@@ -2,13 +2,13 @@ const apikey = "bf8755493a92eb08974e3974b0a725de";
 const weatherForm = document.querySelector(".weatherForm");
 const nameInput = document.querySelector(".nameInput");
 const cityInput = document.querySelector(".cityInput");
-const toggleCheckbox = document.querySelector("#toggleCheckbox");
+const toggleButton = document.querySelector("#toggleButton");
 const card = document.querySelector(".card");
 const givenNameDisplay = document.querySelector("#givenName");
 
 let unit = `metric`;
-toggleCheckbox.addEventListener(`change`, function () {
-  unit = toggleCheckbox.checked ? `imperial` : `metric`;
+toggleButton.addEventListener(`change`, function () {
+  unit = toggleButton.checked ? `imperial` : `metric`;
   if (cityInput.value.trim()) {
     getWeatherData(cityInput.value.trim());
   }
@@ -74,6 +74,11 @@ async function getWeatherData(city) {
   return await response.json();
 }
 
+// error messages
+function displayError(message) {
+  card.innerHTML = `<div class="errorDisplay">${message}</div>`;
+}
+
 // display weather info on card
 function displayWeatherInfo(data) {
   const {
@@ -113,9 +118,4 @@ function displayWeatherInfo(data) {
   card.appendChild(tempDisplay);
   card.appendChild(humidityDisplay);
   card.appendChild(descDisplay);
-}
-
-// error messages
-function displayError(message) {
-  card.innerHTML = `<div class="errorDisplay">${message}</div>`;
 }
