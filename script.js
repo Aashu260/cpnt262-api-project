@@ -6,6 +6,14 @@ const toggleCheckbox = document.querySelector("#toggleCheckbox");
 const card = document.querySelector(".card");
 const givenNameDisplay = document.querySelector("#givenName");
 
+let unit = `metric`;
+toggleCheckbox.addEventListener(`change`, function () {
+  unit = toggleCheckbox.checked ? `imperial` : `metric`;
+  if (cityInput.value.trim()) {
+    getWeatherData(cityInput.value.trim());
+  }
+});
+
 //Saved preferences
 window.onload = function () {
   const savedName = localStorage.getItem("username");
@@ -84,7 +92,13 @@ function displayWeatherInfo(data) {
   const descDisplay = document.createElement("p");
 
   cityDisplay.textContent = `${city}`;
-  tempDisplay.textContent = `${temp} K`;
+
+  tempDisplay.textContent = `${
+    unit === `metric`
+      ? (temp - 273.15).toFixed(1)
+      : (((temp - 273.15) * 9) / 5 + 32).toFixed(1)
+  }°${unit === `metric` ? `C` : `F`}`;
+
   humidityDisplay.textContent = `Humidity: ${humidity}%`;
   descDisplay.textContent = `Weather: ${description}`;
 
@@ -110,21 +124,3 @@ function displayError(message) {
   card.style.display = "flex";
   card.appendChild(errorDisplay);
 }
-
-// switching to celsius
-toggleCheckbox.addEventListener("change", () => {
-  const tempDisplay = document.querySelector(".tempDisplay");
-
-  if (tempDisplay) {
-    const currentTempText = tempDisplay.textContent;
-    const currentTemp = parseFloat(currentTempText);
-
-    if (toggleCheckbox.checked) {
-      const celsiusTemp = currentTemp - 273.15;
-      tempDisplay.textContent = `${celsiusTemp.toFixed(1)}°C`;
-    } else {
-      const kelvinTemp = currentTemp + 273.15;
-      tempDisplay.textContent = `${kelvinTemp.toFixed(1)}K`;
-    }
-  }
-});
